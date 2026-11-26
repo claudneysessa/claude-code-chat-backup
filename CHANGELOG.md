@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 2026-11-26 02:20:00 -03:00 — Primeira release (v0.6.0), checksum em LF e documentação da release
+
+**Alterações**
+- Release `v0.6.0` publicada pelo workflow: `ClaudeChatBackup.exe` (49,5 MB) e `ClaudeChatBackup.exe.sha256`.
+- Workflow: o `.sha256` passa a ser gravado com LF. Com CRLF, `sha256sum -c` no Linux e no Git Bash lê o `\r` como parte do nome do arquivo e falha. O `.sha256` da v0.6.0 foi substituído pela versão em LF, com o mesmo hash.
+- `SECURITY.md`: seção sobre como conferir o download, o que o aviso do SmartScreen significa e a alternativa de compilar.
+- `CONTRIBUTING.md`: seção de releases (versão no csproj, CHANGELOG, tag; o workflow recusa tag diferente do `<Version>`).
+
+**Arquivos/áreas**: `.github/workflows/release.yml`, `SECURITY.md`, `CONTRIBUTING.md`, `CHANGELOG.md`.
+
+**Validações**
+- Execução do workflow para `v0.6.0`: todas as etapas com sucesso (conferência de versão, testes, publicação, checksum, release).
+- Exe baixado da release: SHA-256 igual ao publicado, `sha256sum -c` OK com o arquivo em LF, `ClaudeChatBackup.exe help` responde.
+
+**Limitações**
+- A correção do LF no workflow só será exercitada na próxima tag.
+
 ## 2026-11-26 02:05:00 -03:00 — Release automática pelo GitHub Actions
 
 **Alterações**

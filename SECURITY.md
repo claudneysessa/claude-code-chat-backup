@@ -34,6 +34,24 @@ What the tool **leaves out on purpose**: the Desktop `config.json` (login token 
 to the Windows user through DPAPI, would not work on another machine and would turn a backup into
 a credential leak.
 
+## Verifying a download
+
+Every release is built by GitHub Actions from the tagged commit, by
+[`.github/workflows/release.yml`](.github/workflows/release.yml), after the test suite passes. No
+binary is uploaded by hand.
+
+- Each release ships `ClaudeChatBackup.exe.sha256`, and the release notes repeat the hash. Check it
+  before running the exe:
+
+  ```powershell
+  (Get-FileHash .\ClaudeChatBackup.exe -Algorithm SHA256).Hash.ToLower()
+  ```
+
+- **The executable is not code-signed.** Windows SmartScreen will warn on first run. That warning
+  says only that the file has no publisher signature; the SHA-256 and the public build log are what
+  tie the exe to this source code.
+- If you would rather not trust a prebuilt binary, build it yourself with `build-portable.ps1`.
+
 ## Reporting a vulnerability
 
 Do not open a public issue for anything that could be exploited before a fix exists. Use

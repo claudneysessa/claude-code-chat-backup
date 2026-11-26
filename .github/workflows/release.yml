@@ -39,7 +39,8 @@ jobs:
         run: |
           $exe = "dist/portable/ClaudeChatBackup.exe"
           $hash = (Get-FileHash $exe -Algorithm SHA256).Hash.ToLower()
-          "$hash  ClaudeChatBackup.exe" | Set-Content "$exe.sha256" -Encoding ascii
+          # LF, not CRLF: `sha256sum -c` on Linux and Git Bash reads the \r as part of the file name.
+          [IO.File]::WriteAllText("$PWD/$exe.sha256", "$hash  ClaudeChatBackup.exe`n")
           (Get-Content .github/release-notes.md -Raw) `
             -replace '\{VERSION\}', '${{ github.ref_name }}' `
             -replace '\{SHA256\}', $hash |

@@ -56,6 +56,19 @@ dotnet test ClaudeChatBackup.slnx
 For a change in the window, also run the app (`dotnet run --project src\ClaudeChatBackup.csproj`)
 and check the screen you touched with a real-sized backup made from test data.
 
+## Releases
+
+Releases are cut by the maintainer and built by GitHub Actions, never uploaded by hand:
+
+1. Bump `<Version>` in `src/ClaudeChatBackup.csproj` and add the entry to `CHANGELOG.md`.
+2. Commit and push to `main`.
+3. `git tag vX.Y.Z` and `git push origin vX.Y.Z`.
+
+The [release workflow](.github/workflows/release.yml) refuses a tag that does not match
+`<Version>`, runs the tests, builds the portable exe and publishes it with its SHA-256. The notes
+come from [`.github/release-notes.md`](.github/release-notes.md). Pull requests do not need to touch
+the version.
+
 ## Documentation
 
 Update `README.md` **and** `README.pt-BR.md` in the same commit that changes behavior.
