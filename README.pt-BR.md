@@ -4,6 +4,7 @@
 
 ### Backup das sessões das abas Code e Cowork do Claude Desktop no Windows, com restauração em outro computador.
 
+[![Release](https://img.shields.io/github/v/release/claudneysessa/claude-code-chat-backup?color=e07a5f)](https://github.com/claudneysessa/claude-code-chat-backup/releases/latest)
 [![Licença: MIT](https://img.shields.io/badge/Licen%C3%A7a-MIT-yellow.svg)](LICENSE)
 [![.NET](https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet&logoColor=fff)](https://dotnet.microsoft.com/)
 [![WinForms](https://img.shields.io/badge/UI-WinForms-512BD4)](src/Gui)
@@ -56,7 +57,14 @@ como dados sensíveis. Veja o [SECURITY.md](SECURITY.md).
 
 ## Como usar
 
-Dê dois cliques em `ClaudeChatBackup.exe`.
+Baixe o `ClaudeChatBackup.exe` da
+[última release](https://github.com/claudneysessa/claude-code-chat-backup/releases/latest) e dê dois
+cliques. Não precisa instalar nada.
+
+> O executável não é assinado digitalmente, então o Windows SmartScreen pode dizer *"O Windows
+> protegeu o computador"*. **Mais informações → Executar assim mesmo** abre o app. Cada release
+> traz o SHA-256 para conferir o download e é compilada pelo GitHub Actions a partir do commit da
+> tag.
 
 - **Sessões** lista as conversas deste computador. Clique nas linhas para selecionar e use
   **Backup das selecionadas** ou **Backup de tudo**. Os backups vão para `backups\` ao lado do exe.
@@ -137,6 +145,11 @@ powershell -ExecutionPolicy Bypass -File .\build-release.ps1
 ```
 
 O portable é grande porque o WinForms não suporta trimming.
+
+As releases são automáticas: enviar uma tag `vX.Y.Z` igual ao `<Version>` de
+`src/ClaudeChatBackup.csproj` dispara o
+[`.github/workflows/release.yml`](.github/workflows/release.yml), que roda os testes, gera o exe
+portable e publica com o SHA-256.
 
 ## Limites
 

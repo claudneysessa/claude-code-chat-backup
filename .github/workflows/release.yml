@@ -1,0 +1,56 @@
+name: Release
+
+# Pushing a tag vX.Y.Z builds, tests and publishes the portable exe as a GitHub release.
+# The tag must match <Version> in src/ClaudeChatBackup.csproj.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Check that the tag matches the project version
+        shell: pwsh
+        run: |
+          $version = ([xml](Get-Content src/ClaudeChatBackup.csproj)).Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+          if ("v$version" -ne "${{ github.ref_name }}") {
+            throw "Tag ${{ github.ref_name }} does not match <Version>$version</Version> in src/ClaudeChatBackup.csproj"
+          }
+
+      - name: Test
+        run: dotnet test ClaudeChatBackup.slnx -c Release
+
+      - name: Publish the portable exe
+        shell: pwsh
+        run: pwsh -ExecutionPolicy Bypass -File ./build-portable.ps1
+
+      - name: Checksum and release notes
+        shell: pwsh
+        run: |
+          $exe = "dist/portable/ClaudeChatBackup.exe"
+          $hash = (Get-FileHash $exe -Algorithm SHA256).Hash.ToLower()
+          "$hash  ClaudeChatBackup.exe" | Set-Content "$exe.sha256" -Encoding ascii
+          (Get-Content .github/release-notes.md -Raw) `
+            -replace '\{VERSION\}', '${{ github.ref_name }}' `
+            -replace '\{SHA256\}', $hash |
+            Set-Content dist/release-notes.md -Encoding utf8
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "${{ github.ref_name }}"
+          dist/portable/ClaudeChatBackup.exe
+          dist/portable/ClaudeChatBackup.exe.sha256
+          --title "Claude Chat Backup ${{ github.ref_name }}"
+          --notes-file dist/release-notes.md

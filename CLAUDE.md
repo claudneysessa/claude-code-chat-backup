@@ -22,6 +22,9 @@ Contexto técnico de referência (onde o Claude guarda cada coisa, formato dos a
 ├── README.pt-BR.md          # espelho em português do README.md
 ├── LICENSE                  # MIT
 ├── CONTRIBUTING.md / SECURITY.md / CODE_OF_CONDUCT.md
+├── .github/
+│   ├── workflows/release.yml  # tag vX.Y.Z → testes, exe portable e release no GitHub
+│   └── release-notes.md       # modelo das notas da release ({VERSION}, {SHA256})
 ├── docs/
 │   └── LEVANTAMENTO.md      # onde o Claude guarda os dados e decisões do projeto
 ├── src/                     # código-fonte — SEM subpastas de projeto (sem src/<Projeto>/)
@@ -58,6 +61,7 @@ Nunca entram no backup: `config.json` do Desktop (cache do token OAuth), `ccd-id
 - Testes: `dotnet test ClaudeChatBackup.slnx`
 - Publicar portable: `powershell -ExecutionPolicy Bypass -File .\build-portable.ps1`
 - Publicar release: `powershell -ExecutionPolicy Bypass -File .\build-release.ps1`
+- Lançar versão: subir `<Version>` em `src/ClaudeChatBackup.csproj`, registrar no CHANGELOG, commitar, então `git tag vX.Y.Z` e `git push origin vX.Y.Z`. O GitHub Actions roda os testes, gera o portable e cria a release; tag diferente do `<Version>` falha de propósito.
 - Regenerar ícone: `powershell -ExecutionPolicy Bypass -File .\build-icon.ps1`
 - Rodar a partir do código: `dotnet run --project src\ClaudeChatBackup.csproj -- <comandos>` (sem argumentos abre a janela)
 

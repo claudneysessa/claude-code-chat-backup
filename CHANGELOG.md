@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 2026-11-26 02:05:00 -03:00 — Release automática pelo GitHub Actions
+
+**Alterações**
+- `.github/workflows/release.yml`: ao enviar uma tag `vX.Y.Z`, confere que ela bate com o `<Version>` do csproj, roda `dotnet test`, publica o portable com `build-portable.ps1`, calcula o SHA-256 e cria a release no GitHub com `ClaudeChatBackup.exe` e `ClaudeChatBackup.exe.sha256`.
+- `.github/release-notes.md`: modelo das notas, em inglês e português, com o aviso do SmartScreen (exe sem assinatura digital), o SHA-256 e o lembrete de que backups não são criptografados.
+- READMEs: seção de uso manda baixar da última release, com o aviso do SmartScreen; selo de versão; seção de compilação explica como lançar versão.
+- `AGENTS.md`/`CLAUDE.md`: estrutura com `.github/` e o passo a passo de lançar versão.
+
+**Arquivos/áreas**: `.github/`, `README.md`, `README.pt-BR.md`, `AGENTS.md`, `CLAUDE.md`, `CHANGELOG.md`.
+
+**Validações**: etapas de conferência de versão e de geração das notas executadas localmente em PowerShell (versão 0.6.0 casou com `v0.6.0`, `{VERSION}` e `{SHA256}` substituídos). O workflow em si só roda no GitHub.
+
+**Limitações**
+- Executável sem assinatura digital: o SmartScreen avisa na primeira execução.
+
 ## 2026-11-26 01:40:00 -03:00 — Captura de tela nos READMEs
 
 **Alterações**
