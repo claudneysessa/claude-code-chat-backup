@@ -1,0 +1,30 @@
+# Sensíveis — nunca versionar
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+.credentials.json
+secrets.*
+!*.env.example
+
+# Backups gerados pela ferramenta (contêm conversas)
+backups/
+*.ccbtmp
+*.ccb-tmp
+
+# Build e artefatos
+dist/
+bin/
+obj/
+TestResults/
+*.user
+
+# IDEs e SO
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
