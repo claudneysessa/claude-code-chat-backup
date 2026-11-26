@@ -13,6 +13,10 @@
 
 [Português](README.pt-BR.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Changelog](CHANGELOG.md)
 
+![The Sessões screen of Claude Chat Backup: a dark window listing nine Code sessions with title, project folder, last activity, type and size, a search box and the buttons to back up the selected sessions or everything](docs/images/claude-chat-backup-sessions.png)
+
+<sub>The real application, captured running against a fictional machine: every session in the screenshot is made up.</sub>
+
 </div>
 
 ## What this is

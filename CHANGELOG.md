@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 2026-11-26 01:40:00 -03:00 — Captura de tela nos READMEs
+
+**Alterações**
+- `docs/images/claude-chat-backup-sessions.png`: a tela Sessões do app real, rodando sobre uma máquina fictícia (`USERPROFILE`, `LOCALAPPDATA`, `APPDATA` e `CLAUDE_CONFIG_DIR` apontando para uma pasta temporária com nove sessões inventadas). Capturada com `PrintWindow`, só a janela.
+- `README.md` e `README.pt-BR.md` mostram a captura, com legenda dizendo que as sessões são fictícias.
+
+**Arquivos/áreas**: `docs/images/`, `README.md`, `README.pt-BR.md`.
+
+**Validações**: `ClaudeChatBackup paths` com o mesmo ambiente apontou Desktop e Code só para a pasta fictícia, e `list` mostrou só as 9 sessões inventadas antes da captura.
+
+**Limitações**
+- Definir só `LOCALAPPDATA` não basta: o Windows resolve a pasta a partir de `USERPROFILE`, e o app leu a pasta real do Claude Desktop. Essa primeira captura foi descartada.
+
 ## 2026-11-26 01:24:11 -03:00 — Repositório preparado para publicação open source
 
 **Alterações**

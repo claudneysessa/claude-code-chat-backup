@@ -13,6 +13,10 @@
 
 [English](README.md) · [Contribuir](CONTRIBUTING.md) · [Segurança](SECURITY.md) · [Changelog](CHANGELOG.md)
 
+![A tela Sessões do Claude Chat Backup: janela escura com nove sessões do Code, cada uma com título, pasta do projeto, última atividade, tipo e tamanho, uma caixa de busca e os botões de backup das selecionadas ou de tudo](docs/images/claude-chat-backup-sessions.png)
+
+<sub>O aplicativo real, capturado rodando sobre uma máquina fictícia: todas as sessões do print são inventadas.</sub>
+
 </div>
 
 ## O que é
